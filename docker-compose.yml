@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    ports:
+      - '5432:5432'
+  web:
+    build: .
+    container_name: omni_seeker
+    #command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/omni_seeker
+    depends_on:
+      - db
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true
