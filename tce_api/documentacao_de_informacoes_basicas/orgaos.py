@@ -33,8 +33,8 @@ class Orgaos(Base):
                                 params['nome_orgao'], params['cgc_orgao']
                             )
                         )
-                    self.db_connection.commit()
-                    self.cursor.close()
+            self.db_connection.commit()
+            self.cursor.close()
         except psycopg2.DatabaseError as error:
             print(error)
 
