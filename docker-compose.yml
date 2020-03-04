@@ -4,10 +4,11 @@ services:
     image: postgres
     ports:
       - '5432:5432'
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
   web:
     build: .
     container_name: omni_seeker
-    #command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/omni_seeker
     depends_on:
