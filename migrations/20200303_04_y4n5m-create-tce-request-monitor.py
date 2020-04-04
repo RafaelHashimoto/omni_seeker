@@ -13,7 +13,7 @@ steps = [
 	        "method varchar(10),"
 	        "year integer,"
             "month integer,"
-	        "error varchar(10),"
+	        "error varchar(255),"
             "success boolean"
         ")",
         "DROP TABLE tce_request_monitor",
