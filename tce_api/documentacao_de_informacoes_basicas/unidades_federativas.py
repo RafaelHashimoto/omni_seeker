@@ -8,7 +8,7 @@ class UnidadesFederativas(Base):
 
     def execute(self):
         try:
-            response = self.request_tce_api(self.method + '.json', '')
+            response = self.request_tce_api(self.method)
             unidades_federativas = []
             for params in response.json()['rsp']['_content']:
                 unidades_federativas.append(UnidadeFederativa(params))

@@ -8,7 +8,7 @@ class Municipios(Base):
 
     def execute(self):
         try:
-            response = self.request_tce_api(self.method + '.json', '')
+            response = self.request_tce_api()
             municipios = []
             for params in response.json()['rsp']['_content']:
                 municipios.append(Municipio(params))

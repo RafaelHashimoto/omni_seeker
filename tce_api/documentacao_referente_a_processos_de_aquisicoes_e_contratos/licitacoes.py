@@ -17,7 +17,7 @@ class Licitacoes(Base):
                 licitacoes = []
                 for year in range(self.year, datetime.now().year):
                     self.year = year
-                    response = self.request_tce_api(self.method + '.json',self.url_with_params(municipio.codigo, year))
+                    response = self.request_tce_api(self.url_with_params(municipio.codigo, year))
                     for params in response.json()['rsp']['_content']:
                         licitacoes.append(Licitacao(params))
                         Licitacao.save_multiple(licitacoes)
