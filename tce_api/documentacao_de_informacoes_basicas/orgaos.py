@@ -3,7 +3,7 @@ from itertools import repeat
 from datetime import datetime
 from model.orgao import Orgao
 from model.municipio import Municipio
-import pdb
+
 class Orgaos(Base):
     def __init__(self):
         super().__init__()
