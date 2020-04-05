@@ -3,23 +3,26 @@ from itertools import repeat
 from datetime import datetime
 from model.orgao import Orgao
 from model.municipio import Municipio
-
+import pdb
 class Orgaos(Base):
     def __init__(self):
         super().__init__()
-        self.base_method = 'orgaos.json'
-        self.exercicio = 2015
+        self.initialize_variables_by_method('orgaos')
 
     def execute(self):
-        for municipio in Municipio.all():
-            orgaos = []
-            for exercicio in range(self.exercicio, datetime.now().year):
-                self.exercicio = exercicio
-                response = self.request_tce_api(self.base_method,
-                                            self.url_params(municipio.codigo, exercicio))
-                for params in response.json()['rsp']['_content']:
-                    orgaos.append(Orgao(params))
-                    Orgao.save_multiple(orgaos)
+        try:
+            for municipio in Municipio.by_id_range(self.municipio_id):
+                self.municipio_id = municipio.id
+                orgaos = []
+                for year in range(self.year, datetime.now().year):
+                    self.year = year
+                    response = self.request_tce_api(self.url_with_params(municipio.codigo, year))
+                    for params in response.json()['rsp']['_content']:
+                        orgaos.append(Orgao(params))
+                        Orgao.save_multiple(orgaos)
+            self.save_progress('', True)
+        except Exception as e:
+            self.save_progress(e, False)
 
-    def url_params(self, codigo, exercicio):
-        return ('?codigo_municipio=' + codigo + '&exercicio_orcamento=' + str(exercicio))
+    def url_with_params(self, codigo, year):
+        return ('?codigo_municipio=' + codigo + '&exercicio_orcamento=' + str(year))
