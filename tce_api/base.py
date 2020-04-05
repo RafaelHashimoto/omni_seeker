@@ -16,7 +16,7 @@ class Base:
             self.year = self.request_monitor.year
             self.municipio_id = self.request_monitor.municipio_id
 
-    def request_tce_api(self, method, params = ''):
+    def request_tce_api(self, params = ''):
         return requests.get(self.base_url + self.method + '.json' + params)
 
     def save_progress(self, error, success):
@@ -25,6 +25,11 @@ class Base:
             self.month, self.error_message(error), success,
             self.municipio_id
         )
+
+    def requestable(self):
+        if self.request_monitor and self.request_monitor.success:
+            return False
+        return True
 
     def error_message(self, error):
         if error != '':
