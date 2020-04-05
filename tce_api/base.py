@@ -1,40 +1,32 @@
 import requests
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-engine = create_engine('postgresql://postgres:root@db/omni_seeker_db')
-session = sessionmaker(bind=engine)
+from model.tce_request_monitor import TceRequestMonitor
 
 class Base:
     def __init__(self):
         self.base_url = 'https://api.tce.ce.gov.br/index.php/sim/1_0/'
+        self.month = None
+
+    def initialize_variables_by_method(self, method):
+        self.method = method
+        self.request_monitor = TceRequestMonitor.find_by_method(self.method)
+        if self.request_monitor is None:
+            self.year = 2015
+            self.municipio_id = 0
+        else:
+            self.year = self.request_monitor.year
+            self.municipio_id = self.request_monitor.municipio_id
 
     def request_tce_api(self, method, params):
         return requests.get(self.base_url + method + params)
 
-    def get_municipios(self):
-      db_connection = self.database_connection()
-      cursor = db_connection.cursor()
-      cursor.execute('select codigo from municipios')
-      municipios = cursor.fetchall()
-      cursor.close()
-      return municipios
-
-    def get_tce_request_monitor(self, method):
-        db_connection = self.database_connection()
-        cursor = db_connection.cursor()
-        cursor.execute("select id from tce_request_monitor where method = '%s'" %(method))
-        monitor = cursor.fetchall()
-        cursor.close()
-        return monitor
-
-    def save_progress(self, method, year, error, success):
-        tce_request_monitor = self.get_tce_request_monitor(method)
-        cursor = self.get_db_cursor()
-        cursor.execute(
-            "INSERT INTO tce_request_monitor (method, year, error, success)"
-            "VALUES(%s, %s, %s, %s)",
-            (method, year, error.__doc__, success)
+    def save_progress(self, error, success):
+        TceRequestMonitor.save_progress(
+            self.request_monitor, self.method, self.year,
+            self.month, self.error_message(error), success,
+            self.municipio_id
         )
-        self.db_connection.commit()
-        cursor.close()
+
+    def error_message(self, error):
+        if error != '':
+            error = str(type(error)).split("'")[1] + ':' + error.args[0]
+        return error
