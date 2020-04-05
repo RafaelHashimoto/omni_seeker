@@ -7,7 +7,7 @@ class UnidadeFederativa(Base):
     id = Column(Integer, primary_key=True)
     codigo = Column(String)
     nome = Column(String)
-    sigla = Column(Integer)
+    sigla = Column(String)
 
     def __init__(self, params):
         self.codigo = params['codigo_unidade_federacao']
