@@ -17,10 +17,14 @@ class Municipio(Base):
         self.codigo_unidade_federacao = params['geoibgeId'][:2]
 
     @classmethod
+    def all(cls):
+        return cls.session.query(cls).all()
+
+    @classmethod
+    def by_id_range(cls, id):
+        return cls.session.query(cls).filter(cls.id >= id)
+
+    @classmethod
     def save_multiple(cls, array):
         cls.session.add_all(array)
         cls.session.commit()
-
-    @classmethod
-    def all(cls):
-        return cls.session.query(cls).all()
