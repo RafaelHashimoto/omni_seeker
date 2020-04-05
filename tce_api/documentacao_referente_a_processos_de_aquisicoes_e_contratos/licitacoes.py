@@ -3,26 +3,31 @@ from itertools import repeat
 from datetime import datetime
 from model.licitacao import Licitacao
 from model.municipio import Municipio
+from model.tce_request_monitor import TceRequestMonitor
 import pdb
 class Licitacoes(Base):
     def __init__(self):
         super().__init__()
-        self.base_method = 'licitacoes.json'
-        self.exercicio = 2015
+        self.initialize_variables_by_method('licitacoes')
 
     def execute(self):
-        for municipio in Municipio.all():
-            licitacoes = []
-            for exercicio in range(self.exercicio, datetime.now().year):
-                self.exercicio = exercicio
-                response = self.request_tce_api(self.base_method,self.url_with_params(municipio.codigo, exercicio))
-                for params in response.json()['rsp']['_content']:
-                    licitacoes.append(Licitacao(params))
-                    Licitacao.save_multiple(licitacoes)
+        try:
+            for municipio in Municipio.by_id_range(self.municipio_id):
+                self.municipio_id = municipio.id
+                licitacoes = []
+                for year in range(self.year, datetime.now().year):
+                    self.year = year
+                    response = self.request_tce_api(self.method + '.json',self.url_with_params(municipio.codigo, year))
+                    for params in response.json()['rsp']['_content']:
+                        licitacoes.append(Licitacao(params))
+                        Licitacao.save_multiple(licitacoes)
+            self.save_progress('', True)
+        except Exception as e:
+            self.save_progress(e, False)
 
-    def url_with_params(self, city, year):
+    def url_with_params(self, code, year):
         return (
-                  '?codigo_municipio=' + city +
+                  '?codigo_municipio=' + code +
                   '&exercicio_orcamento=' + str(year) +
                   '&data_realizacao_autuacao_licitacao=' + str(year) + '0101_' + str(year) + '1231'
                 )
