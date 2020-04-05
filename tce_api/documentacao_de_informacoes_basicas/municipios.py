@@ -1,6 +1,5 @@
 from tce_api.base import Base
 from model.municipio import Municipio
-
 class Municipios(Base):
     def __init__(self):
         super().__init__()
@@ -8,11 +7,12 @@ class Municipios(Base):
 
     def execute(self):
         try:
-            response = self.request_tce_api()
-            municipios = []
-            for params in response.json()['rsp']['_content']:
-                municipios.append(Municipio(params))
-            Municipio.save_multiple(municipios)
-            self.save_progress('', True)
+            if self.requestable():
+                response = self.request_tce_api()
+                municipios = []
+                for params in response.json()['rsp']['_content']:
+                    municipios.append(Municipio(params))
+                Municipio.save_multiple(municipios)
+                self.save_progress('', True)
         except Exception as e:
             self.save_progress(e, False)
