@@ -1,12 +1,5 @@
 from tce_api.base import Base
-import pdb
-import psycopg2
 from model.municipio import Municipio
-
-
-class Licitacoes(Base):
-    def __init__(self):
-        super().__init__()
 
 class Municipios(Base):
     def __init__(self):
