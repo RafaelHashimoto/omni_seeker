@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Float, Integer, String, Text
-from model.base import Base
+from models.base import Base
 
 
 class Licitacao(Base):

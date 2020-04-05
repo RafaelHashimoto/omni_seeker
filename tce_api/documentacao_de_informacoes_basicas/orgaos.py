@@ -1,8 +1,8 @@
 from tce_api.base import Base
 from itertools import repeat
 from datetime import datetime
-from model.orgao import Orgao
-from model.municipio import Municipio
+from models.orgao import Orgao
+from models.municipio import Municipio
 
 class Orgaos(Base):
     def __init__(self):

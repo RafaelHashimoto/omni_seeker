@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
-from model.base import Base
+from models.base import Base
 import pdb
 from datetime import datetime
 class TceRequestMonitor(Base):

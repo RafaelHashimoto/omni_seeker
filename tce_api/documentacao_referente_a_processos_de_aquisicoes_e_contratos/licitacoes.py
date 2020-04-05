@@ -1,9 +1,9 @@
 from tce_api.base import Base
 from itertools import repeat
 from datetime import datetime
-from model.licitacao import Licitacao
-from model.municipio import Municipio
-from model.tce_request_monitor import TceRequestMonitor
+from models.licitacao import Licitacao
+from models.municipio import Municipio
+from models.tce_request_monitor import TceRequestMonitor
 import pdb
 class Licitacoes(Base):
     def __init__(self):

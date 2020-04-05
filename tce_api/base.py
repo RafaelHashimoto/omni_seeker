@@ -1,5 +1,5 @@
 import requests
-from model.tce_request_monitor import TceRequestMonitor
+from models.tce_request_monitor import TceRequestMonitor
 
 class Base:
     def __init__(self):

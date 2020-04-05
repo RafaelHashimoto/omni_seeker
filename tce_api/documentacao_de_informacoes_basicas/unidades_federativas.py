@@ -1,5 +1,5 @@
 from tce_api.base import Base
-from model.unidade_federativa import UnidadeFederativa
+from models.unidade_federativa import UnidadeFederativa
 import pdb
 class UnidadesFederativas(Base):
     def __init__(self):

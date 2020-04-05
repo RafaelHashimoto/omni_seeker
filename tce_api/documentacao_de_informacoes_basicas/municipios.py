@@ -1,5 +1,5 @@
 from tce_api.base import Base
-from model.municipio import Municipio
+from models.municipio import Municipio
 class Municipios(Base):
     def __init__(self):
         super().__init__()
