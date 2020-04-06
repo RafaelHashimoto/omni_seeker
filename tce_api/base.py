@@ -1,6 +1,7 @@
 import requests
 from models.tce_request_monitor import TceRequestMonitor
-
+import json
+from barely_json import parse
 class Base:
     def __init__(self):
         self.base_url = 'https://api.tce.ce.gov.br/index.php/sim/1_0/'
@@ -35,3 +36,9 @@ class Base:
         if error != '':
             error = str(type(error)).split("'")[1] + ':' + error.args[0]
         return error
+
+    def sanitize_response(self, text):
+        try:
+            return json.loads(text)
+        except Exception as e:
+            return parse(text)
