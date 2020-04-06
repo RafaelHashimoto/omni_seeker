@@ -28,3 +28,7 @@ class Orgao(Base):
 	@classmethod
 	def all(cls):
 		return cls.session.query(cls).all()
+
+	@classmethod
+	def all_by_city_and_year(cls, city, year):
+		return cls.session.query(cls).filter(cls.codigo_municipio == city, cls.exercicio_orcamento == str(year) + '00')
