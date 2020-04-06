@@ -1,17 +1,5 @@
 """
-create table licitacoes
-"""
-
-from yoyo import step
-
-__depends__ = {'20200303_04_y4n5m-create-tce-request-monitor'}
-
-steps = [
-    step("")
-]
-
-"""
-create tce_request_monitor
+create licitacoes
 """
 
 from yoyo import step
