@@ -22,7 +22,7 @@ steps = [
             'data_inicio_gestao timestamp,'
             'data_referencia varchar(10),'
             'nome_gestor varchar(255),'
-            'data_fim_gestao varchar(10),'
+            'data_fim_gestao timestamp,'
             'tipo_cargo varchar(10),'
             'status_ordenador_despesa integer'
         ")",
