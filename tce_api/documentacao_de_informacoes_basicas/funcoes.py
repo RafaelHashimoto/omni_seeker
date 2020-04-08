@@ -1,6 +1,6 @@
 from tce_api.base import Base
 from models.funcao import Funcao
-class TiposUnidadesAdministrativas(Base):
+class Funcoes(Base):
     def __init__(self):
         super().__init__()
         self.initialize_variables_by_method('funcoes')
