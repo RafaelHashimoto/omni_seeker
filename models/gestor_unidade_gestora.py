@@ -14,7 +14,7 @@ class GestorUnidadeGestora(Base):
     codigo_ingresso = Column(String)
     codigo_vinculo = Column(String)
     numero_expediente = Column(String)
-    data_inicio_gestao = Column(Datetime)
+    data_inicio_gestao = Column(DateTime)
     data_referencia = Column(String)
     nome_gestor = Column(String)
     data_fim_gestao = Column(String)
@@ -31,19 +31,19 @@ class GestorUnidadeGestora(Base):
         self.codigo_ingresso = params['codigo_ingresso']
         self.codigo_vinculo = params['codigo_vinculo']
         self.numero_expediente = params['numero_expediente']
-        self.data_inicio_gestao = params['data_inicio_gestao']
+        self.data_inicio_gestao = params['data_inicio_gestao'] if params['data_inicio_gestao'] != '' else None
         self.data_referencia = params['data_referencia']
         self.nome_gestor = params['nome_gestor']
-        self.data_fim_gestao = params['data_fim_gestao']
+        self.data_fim_gestao = params['data_fim_gestao'] if params['data_fim_gestao'] != '' else None
         self.tipo_cargo = params['tipo_cargo']
-        self.status_ordenador_despesa = params['status_ordenador_despesa']
+        self.status_ordenador_despesa = params['status_ordenador_despesa'] if params['status_ordenador_despesa'] != '' else None
 
 
-	@classmethod
-	def save_multiple(cls, array):
-		cls.session.add_all(array)
-		cls.session.commit()
+    @classmethod
+    def save_multiple(cls, array):
+        cls.session.add_all(array)
+        cls.session.commit()
 
-	@classmethod
-	def all(cls):
-		return cls.session.query(cls).all()
+    @classmethod
+    def all(cls):
+        return cls.session.query(cls).all()

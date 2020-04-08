@@ -27,15 +27,15 @@ class Ordenador(Base):
 		self.codigo_unidade_gestora = params['codigo_unidade_gestora']
 		self.codigo_orgao = params['codigo_orgao']
 		self.codigo_unidade = params['codigo_unidade']
-		self.data_inclusao_unidade_orcamentaria = params['data_inclusao_unidade_orcamentaria']
+		self.data_inclusao_unidade_orcamentaria = params['data_inclusao_unidade_orcamentaria'] if params['data_inclusao_unidade_orcamentaria'] != '' else None
 		self.cpf_servidor = params['cpf_servidor']
 		self.codigo_ingresso = params['codigo_ingresso']
 		self.codigo_vinculo = params['codigo_vinculo']
 		self.numero_expediente_nomeacao = params['numero_expediente_nomeacao']
-		self.data_inicio_gestao_ordenador = params['data_inicio_gestao_ordenador']
+		self.data_inicio_gestao_ordenador = params['data_inicio_gestao_ordenador'] if params['data_inicio_gestao_ordenador'] != '' else None
 		self.data_referencia_ordenador = params['data_referencia_ordenador']
 		self.nome_ordenador = params['nome_ordenador']
-		self.data_fim_gestao_ordenador = params['data_fim_gestao_ordenador']
+		self.data_fim_gestao_ordenador = params['data_fim_gestao_ordenador']  if params['data_fim_gestao_ordenador'] != '' else None
 		self.tipo_cargo = params['tipo_cargo']
 
 	@classmethod
