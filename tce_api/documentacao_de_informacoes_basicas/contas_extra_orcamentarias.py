@@ -17,7 +17,8 @@ class ContasExtraOrcamentarias(Base):
                 for year in range(self.year, datetime.now().year):
                     self.year = year
                     response = self.request_tce_api(self.url_with_params(municipio.codigo, year))
-                    for params in response.json()['rsp']['_content']:
+                    response = self.sanitize_response(response.text)
+                    for params in response['rsp']['_content']:
                         contas_extra_orcamentarias.append(ContaExtraOrcamentaria(params))
                         ContaExtraOrcamentaria.save_multiple(contas_extra_orcamentarias)
             self.save_progress('', True)

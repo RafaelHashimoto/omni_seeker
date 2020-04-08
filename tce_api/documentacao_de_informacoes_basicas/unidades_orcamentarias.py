@@ -3,7 +3,7 @@ from itertools import repeat
 from datetime import datetime
 from models.unidade_orcamentaria import UnidadeOrcamentaria
 from models.municipio import Municipio
-
+import pdb
 class UnidadesOrcamentarias(Base):
     def __init__(self):
         super().__init__()
@@ -17,7 +17,8 @@ class UnidadesOrcamentarias(Base):
                 for year in range(self.year, datetime.now().year):
                     self.year = year
                     response = self.request_tce_api(self.url_with_params(municipio.codigo, year))
-                    for params in response.json()['rsp']['_content']:
+                    response = self.sanitize_response(response.text)
+                    for params in response['rsp']['_content']:
                         unidades_orcamentarias.append(UnidadeOrcamentaria(params))
                         UnidadeOrcamentaria.save_multiple(unidades_orcamentarias)
             self.save_progress('', True)
