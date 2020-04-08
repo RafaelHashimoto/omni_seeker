@@ -19,7 +19,7 @@ class Orgaos(Base):
                     response = self.request_tce_api(self.url_with_params(municipio.codigo, year))
                     for params in response.json()['rsp']['_content']:
                         orgaos.append(Orgao(params))
-                        Orgao.save_multiple(orgaos)
+                Orgao.save_multiple(orgaos)
             self.save_progress('', True)
         except Exception as e:
             self.save_progress(e, False)
