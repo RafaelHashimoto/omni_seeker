@@ -21,14 +21,11 @@ class ContasBancarias(Base):
                     if municipio.codigo in ['057', '099']:
                         orgaos = Orgao.all_by_city_and_year(municipio.codigo, year)
                         for orgao in orgaos:
-                            response = self.sanitize_response(
-                                self.request_tce_api(self.url_with_params(municipio.codigo, orgao.codigo_orgao)).text
-                            )
+                            response = self.request_tce_api(self.url_with_params(municipio.codigo, orgao.codigo_orgao))
                             for params in response['rsp']['_content']:
                                 contas_bancarias.append(ContaBancaria(params))
                     else:
                         response = self.request_tce_api(self.url_with_params(municipio.codigo))
-                        response = self.sanitize_response(response.text)
                         for params in response['rsp']['_content']:
                             contas_bancarias.append(ContaBancaria(params))
                 ContaBancaria.save_multiple(contas_bancarias)

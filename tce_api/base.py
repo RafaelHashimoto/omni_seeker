@@ -18,7 +18,11 @@ class Base:
             self.municipio_id = self.request_monitor.municipio_id
 
     def request_tce_api(self, params = ''):
-        return requests.get(self.base_url + self.method + '.json' + params)
+        return self.sanitize_response(
+                        requests.get(
+                            self.base_url + self.method + '.json' + params
+                        ).text
+                    )
 
     def save_progress(self, error, success):
         TceRequestMonitor.save_progress(
@@ -34,7 +38,7 @@ class Base:
 
     def error_message(self, error):
         if error != '':
-            error = str(type(error)).split("'")[1] + ':' + error.args[0]
+            error = str(type(error)).split("'")[1] + ':' +  str(error.args[0])
         return error
 
     def sanitize_response(self, text):

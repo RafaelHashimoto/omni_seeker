@@ -3,7 +3,6 @@ from itertools import repeat
 from datetime import datetime
 from models.licitacao import Licitacao
 from models.municipio import Municipio
-from models.tce_request_monitor import TceRequestMonitor
 import pdb
 class Licitacoes(Base):
     def __init__(self):
@@ -18,7 +17,7 @@ class Licitacoes(Base):
                 for year in range(self.year, datetime.now().year):
                     self.year = year
                     response = self.request_tce_api(self.url_with_params(municipio.codigo, year))
-                    for params in response.json()['rsp']['_content']:
+                    for params in response['rsp']['_content']:
                         licitacoes.append(Licitacao(params))
                         Licitacao.save_multiple(licitacoes)
             self.save_progress('', True)

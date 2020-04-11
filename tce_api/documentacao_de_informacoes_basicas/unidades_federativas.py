@@ -11,7 +11,7 @@ class UnidadesFederativas(Base):
             if self.requestable():
                 unidades_federativas = []
                 response = self.request_tce_api()
-                for params in response.json()['rsp']['_content']:
+                for params in response['rsp']['_content']:
                     unidades_federativas.append(UnidadeFederativa(params))
                 UnidadeFederativa.save_multiple(unidades_federativas)
                 self.save_progress('', True)
