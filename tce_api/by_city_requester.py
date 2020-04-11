@@ -3,7 +3,7 @@ from datetime import datetime
 from models.municipio import Municipio
 
 class ByCityRequester(Base):
-    def __init__(self, method, cls):
+    def __init__(self, cls):
         super().__init__()
         self.initialize_variables_by_method(cls.__table__.name)
         self.cls = cls

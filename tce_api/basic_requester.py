@@ -13,7 +13,7 @@ class BasicRequester(Base):
                 array = []
                 for params in response['rsp']['_content']:
                     array.append(self.cls(params))
-                cls.save_multiple(array)
+                self.cls.save_multiple(array)
                 self.save_progress('', True)
         except Exception as e:
             self.save_progress(e, False)

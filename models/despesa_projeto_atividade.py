@@ -3,7 +3,7 @@ from models.base import Base
 
 
 class DespesaProjetoAtividade(Base):
-    __tablename__ = 'orcamento_receita'
+    __tablename__ = 'despesa_projeto_atividade'
 
     id = Column(Integer, primary_key=True)
     codigo_municipio = Column(String)

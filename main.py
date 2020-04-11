@@ -18,10 +18,8 @@ from tce_api.documentacao_de_informacoes_basicas.unidades_federativas import Uni
 from tce_api.documentacao_de_informacoes_basicas.contas_bancarias import ContasBancarias
 # from tce_api.documentacao_referente_a_processos_de_aquisicoes_e_contratos.licitacoes import Licitacoes
 
-from tce_api.basic_request import BasicRequest
+from tce_api.basic_requester import BasicRequester
 from tce_api.by_city_requester import ByCityRequester
-
-
 
 UnidadesFederativas().execute()
 
