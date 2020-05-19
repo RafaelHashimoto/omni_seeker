@@ -27,6 +27,7 @@ from models.orcamento_receita import OrcamentoReceita
 #Documentacao Comprobatoria de Receitas - SIM
 
 #Documentacao referente a Processos de Aquisicoes e Contratos - SIM
+from tce_api.documentacao_referente_a_processos_de_aquisicoes_e_contratos.itens_licitacoes import ItensLicitacoes
 from tce_api.documentacao_referente_a_processos_de_aquisicoes_e_contratos.licitacoes import Licitacoes
 
 #Documentacao Comprobatoria de Despesas - SIM
@@ -74,8 +75,8 @@ ByCityRequester(DespesaProjetoAtividade).execute()
 # dotacoes_licitacoes
 # contratados
 # contratos
-# itens_licitacoes
-# Licitacoes().execute()
+ItensLicitacoes().execute()
+Licitacoes().execute()
 # comissoes_licitacoes
 # licitantes
 
