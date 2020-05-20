@@ -11,10 +11,10 @@ class ItemLicitacao(Base):
     numero_licitacao = Column(String)
     numero_sequencial_item_licitacao = Column(String)
     numero_documento_negociante = Column(String)
-    descricao_item_licitacao = Column(String)
+    descricao_item_licitacao = Column(Text)
     valor_vencedor_item_licitacao = Column(Float)
     codigo_tipo_negociante = Column(String)
-    descricao_unidade_item_licitacao = Column(String)
+    descricao_unidade_item_licitacao = Column(Text)
     numero_quantidade_item_licitacao = Column(Float)
     valor_unitario_item_licitacao = Column(Float)
 
