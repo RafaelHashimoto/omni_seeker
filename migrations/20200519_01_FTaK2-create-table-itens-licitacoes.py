@@ -15,10 +15,10 @@ steps = [
             'numero_licitacao varchar(50),'
             'numero_sequencial_item_licitacao integer,'
             'numero_documento_negociante varchar(20),'
-            'descricao_item_licitacao varchar(255),'
+            'descricao_item_licitacao text,'
             'valor_vencedor_item_licitacao decimal,'
             'codigo_tipo_negociante varchar(10),'
-            'descricao_unidade_item_licitacao varchar(255),'
+            'descricao_unidade_item_licitacao text,'
             'numero_quantidade_item_licitacao decimal,'
             'valor_unitario_item_licitacao decimal'
         ")",
